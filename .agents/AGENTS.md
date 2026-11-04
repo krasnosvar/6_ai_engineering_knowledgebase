@@ -351,8 +351,14 @@ Owner asked why the math is needed and to fill 2026 LLM-engineering gaps.
   `10_serving_and_operations/02_examples/04_trace.py`.
 - Facts not re-checked against live docs: default local ports (llama-server
   8080, Ollama 11434, LM Studio 1234, vLLM 8000), "Q4 ≈ 4.5–5 bits/weight".
-- Inventory now: 54 lessons, 174 lesson self-check questions + 5 review
-  questions, 30 CPU examples, 6 that need local weights, 11 exercise blocks.
+- Inventory now: 54 lessons, 174 lesson self-check questions + 9 review
+  questions, 30 CPU examples, 6 that need local weights, 11 exercise blocks
+  with 37 programmable functions (`raise NotImplementedError` in task.py).
+- Exercises were extended in sections 1, 5, 6, 7, 9, 10 (14 new functions)
+  and capstones got acceptance criteria for cost, prompt versions,
+  injection cases, judge calibration, MCP-style boundary, traces; review
+  questions 6–9 span the new lessons; competencies matrix has a section
+  «Свидетельства в прикладных темах».
 - Known leftover: lessons in sections 3–4 still use unlabelled
   `<summary>Разбор</summary>`; math 04/05 interleave question/answer —
   normalize in a separate pass.
@@ -361,7 +367,7 @@ Owner asked why the math is needed and to fill 2026 LLM-engineering gaps.
 
 The per-lesson self-check questions above are formative (mid-lesson,
 collapsible, one learner at a time). A separate cross-topic review block
-exists at `12_capstones/01_theory/review_questions.md`: 5 questions, each
+exists at `12_capstones/01_theory/review_questions.md`: 9 questions, each
 deliberately spanning two sections instead of one, for self-test before the
 capstone project. Keep it out of the sequential lesson order (it is NOT
 "lesson 39") and linked separately from the section's own reading-order list
