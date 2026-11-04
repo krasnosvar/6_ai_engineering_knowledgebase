@@ -113,7 +113,7 @@ logits = model(x)      # вызов модели = прогон входа че�
 который хранит свои данные (здесь слои) и умеет действия (здесь `forward`);
 `class` и `self` с примером — в
 [минимуме Python](../../0_lab_setup/python_minimum.md), подробнее — в
-[Python-базе](../../../4_python_my_knowledgebase/1_python/4_oop/01_theory/01_what_is_a_class.md).
+[Python-базе](../../../4_python_my_knowledgebase/1_python/3_oop/01_theory/01_what_is_a_class.md).
 Для чтения кода курса достаточно такой формы:
 
 ```python
