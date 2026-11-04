@@ -111,9 +111,9 @@ logits = model(x)      # вызов модели = прогон входа че�
 Когда вычисление не укладывается в простую цепочку (например, нужно сложить
 выходы двух слоёв), модель описывают **классом**. Класс — это шаблон объекта,
 который хранит свои данные (здесь слои) и умеет действия (здесь `forward`);
-`class` и `self` с примером — в
-[минимуме Python](../../0_lab_setup/python_minimum.md), подробнее — в
-[Python-базе](../../../4_python_my_knowledgebase/1_python/3_oop/01_theory/01_what_is_a_class.md).
+`class` и `self` с примером — в [минимуме
+Python](../../0_lab_setup/python_minimum.md), подробнее — в
+[Python-базе](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/3_oop/01_theory/01_what_is_a_class.md).
 Для чтения кода курса достаточно такой формы:
 
 ```python

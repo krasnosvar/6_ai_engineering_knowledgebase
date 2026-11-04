@@ -30,4 +30,5 @@ uv run python 5_llm_applications/03_exercises/check.py
 твоего кода. Сохрани объяснения и результаты изменённого эксперимента по
 [шаблону отчёта](../../other/experiment_template.md).
 
-[Решения](../04_exercises_answers/README.md) открывай после самостоятельной попытки.
+[Решения](../04_exercises_answers/README.md) открывай после самостоятельной
+попытки.

@@ -38,3 +38,15 @@ uv run python 10_serving_and_operations/02_examples/03_release_gate.py
 
 Добавь минимальный размер eval-набора и критерий отката; пороги выбери до
 test.
+
+## 04_trace.py
+
+Профиль: **CPU**. Регистратор spans печатает дерево trace одного
+RAG-запроса с длительностями и атрибутами; ключ в вопросе маскируется до
+записи. Время учебное, поэтому вывод одинаков при каждом запуске.
+
+```bash
+uv run python 10_serving_and_operations/02_examples/04_trace.py
+```
+
+Добавь span `rerank` внутрь `retrieve` и предскажи новые длительности.

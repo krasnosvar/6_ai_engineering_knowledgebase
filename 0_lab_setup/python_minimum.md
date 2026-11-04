@@ -1,11 +1,11 @@
 # Минимум Python для курса
 
-Код примеров и заданий курса написан на Python и использует ограниченный
-набор конструкций. Здесь собран весь этот набор: у каждой конструкции —
-короткий пример и ссылка на подробный урок в соседней [Python-базе
-серии](../../4_python_my_knowledgebase/README.md). Если пример понятен с
-первого взгляда, переходи к следующему; если нет — открой ссылку
-«подробнее», прежде чем идти дальше.
+Код примеров и заданий курса написан на Python и использует ограниченный набор
+конструкций. Здесь собран весь этот набор: у каждой конструкции — короткий
+пример и ссылка на подробный урок в соседней [Python-базе
+серии](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/README.md).
+Если пример понятен с первого взгляда, переходи к следующему; если нет — открой
+ссылку «подробнее», прежде чем идти дальше.
 
 Проверить себя можно [входной диагностикой](03_exercises/README.md): она
 использует все конструкции с этой страницы.
@@ -22,7 +22,7 @@ print(total_minutes(3, 5))   # 16
 
 `def` объявляет функцию, `return` возвращает результат, `per_check=2` — значение
 по умолчанию, если аргумент не передан. Подробнее:
-[функции](../../4_python_my_knowledgebase/1_python/1_python_fundamentals/06_functions_basics/).
+[функции](https://github.com/krasnosvar/4_python_my_knowledgebase/tree/main/1_python/1_python_fundamentals/06_functions_basics/).
 
 ## Циклы и условия
 
@@ -40,7 +40,7 @@ for i in range(3):            # 0, 1, 2
 ```
 
 Блок кода задаётся отступом в 4 пробела. Подробнее: [ветвления и
-циклы](../../4_python_my_knowledgebase/1_python/1_python_fundamentals/04_control_flow/).
+циклы](https://github.com/krasnosvar/4_python_my_knowledgebase/tree/main/1_python/1_python_fundamentals/04_control_flow/).
 
 ## f-строки
 
@@ -51,7 +51,7 @@ print(f"precision={precision:.3f}")   # precision=0.667
 
 Выражение в фигурных скобках подставляется в строку; `:.3f` — три знака после
 запятой. Подробнее: [операторы и
-выражения](../../4_python_my_knowledgebase/1_python/1_python_fundamentals/02_operators_and_expressions/).
+выражения](https://github.com/krasnosvar/4_python_my_knowledgebase/tree/main/1_python/1_python_fundamentals/02_operators_and_expressions/).
 
 ## Списки, словари, множества
 
@@ -75,7 +75,7 @@ print("db" in labels)         # True
 
 Список — упорядоченная последовательность, словарь — пары «ключ → значение»,
 множество — набор без повторов. Подробнее:
-[коллекции](../../4_python_my_knowledgebase/1_python/1_python_fundamentals/05_collections/01_theory/01_lists_tuples_sets_dicts.md).
+[коллекции](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/05_collections/01_theory/01_lists_tuples_sets_dicts.md).
 
 ## zip, enumerate и списковые выражения
 
@@ -95,7 +95,7 @@ positive = [e for e in errors if e > 0]      # [] — фильтр по усло
 `zip` идёт по нескольким спискам параллельно, `enumerate` добавляет номер.
 Запись `[выражение for ... in ... if ...]` строит новый список, она заменяет
 цикл с `append`. Подробнее:
-[comprehensions](../../4_python_my_knowledgebase/1_python/1_python_fundamentals/05_collections/01_theory/03_comprehensions.md).
+[comprehensions](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/05_collections/01_theory/03_comprehensions.md).
 
 ## lambda и сортировка по ключу
 
@@ -107,7 +107,7 @@ print(best)                   # ['doc2', 'doc3', 'doc1']
 
 `lambda doc: scores[doc]` — короткая функция без имени: для каждого документа
 она возвращает его оценку, и `sorted` упорядочивает по ней. Подробнее:
-[lambda](../../4_python_my_knowledgebase/1_python/2_functions_and_decorators/01_theory/01_lambdas.md).
+[lambda](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/2_functions_and_decorators/01_theory/01_lambdas.md).
 
 ## Исключения: raise и try/except
 
@@ -126,7 +126,7 @@ except ValueError as error:
 `raise` останавливает функцию и сообщает об ошибке. `try/except` ловит ошибку
 указанного типа, и программа продолжает работу. Почти все задания курса требуют
 поднимать `ValueError` на неверных входах. Подробнее:
-[исключения](../../4_python_my_knowledgebase/1_python/1_python_fundamentals/07_exceptions/).
+[исключения](https://github.com/krasnosvar/4_python_my_knowledgebase/tree/main/1_python/1_python_fundamentals/07_exceptions/).
 
 ## Классы
 
@@ -147,7 +147,7 @@ print(ticket.short(10))       # не работае
 Класс — шаблон, объект — конкретный экземпляр. `__init__` заполняет атрибуты при
 создании, `self` — «этот объект». В PyTorch модель — класс, поэтому эта
 конструкция встретится в разделах 3, 4 и 8. Подробнее: [что такое
-класс](../../4_python_my_knowledgebase/1_python/3_oop/01_theory/01_what_is_a_class.md).
+класс](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/3_oop/01_theory/01_what_is_a_class.md).
 
 ## Файлы и JSON
 
@@ -165,7 +165,7 @@ print(loaded == rows)         # True
 `with open(...)` открывает файл и гарантированно закрывает его после блока.
 `json.dumps` превращает данные в текст, `json.loads` — обратно. Подробнее:
 [контекстные
-менеджеры](../../4_python_my_knowledgebase/1_python/2_functions_and_decorators/01_theory/06_context_managers.md).
+менеджеры](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/2_functions_and_decorators/01_theory/06_context_managers.md).
 
 ## import и запуск скрипта
 
@@ -183,13 +183,13 @@ if __name__ == "__main__":
 `import` подключает модуль. Блок `if __name__ == "__main__":` выполняется,
 только когда файл запущен командой `python файл.py`, а не импортирован.
 Подробнее: [модули и
-import](../../4_python_my_knowledgebase/1_python/1_python_fundamentals/08_modules_and_imports/).
+import](https://github.com/krasnosvar/4_python_my_knowledgebase/tree/main/1_python/1_python_fundamentals/08_modules_and_imports/).
 
 ## Подсказки типов
 
 В части примеров встречаются записи вида `def f(x: list[float]) -> float:`. Это
 необязательные подсказки типов: Python их не проверяет при запуске, они помогают
 читать код. Подробнее — раздел «Аннотации типов» в уроке о
-[функциях](../../4_python_my_knowledgebase/1_python/1_python_fundamentals/06_functions_basics/01_theory/01_functions_basics.md).
+[функциях](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/06_functions_basics/01_theory/01_functions_basics.md).
 
 [К разделу 0](README.md).

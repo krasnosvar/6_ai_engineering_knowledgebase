@@ -37,10 +37,10 @@ breaks syntax, tables.
   other reason (including a rename/split done for a different purpose, like
   extracting lesson content out of a README.md), must be wrapped at 70-80
   chars as part of that same edit.
-- **Phase 2 (later, separate explicitly-scoped task):** a dedicated
-  retroactive reflow pass across every existing lesson file in this repo,
-  done together with the equivalent pass in the sibling devops repo — not
-  bundled silently into unrelated work.
+- **Phase 2 — done 2026-11-04** at the owner's request: every `.md` was
+  reflowed paragraph-by-paragraph (whole paragraph re-wrapped, never a
+  single long line cut in two — that leaves orphan words). Remaining lines
+  over 80 are only unbreakable links, tables and code. Keep it that way.
 
 ## Directory & Structural Conventions
 
@@ -69,32 +69,35 @@ breaks syntax, tables.
   an existing section, insert it at the right position and renumber
   everything after it (both the files and the README's list) rather than
   appending out of order at the end.
+  Exception (2026-11-04): `1_math_and_data/01_theory/00_why_math.md` is an
+  orientation lesson placed before `01_` without renumbering; sections 5,
+  6, 7, 9, 10 got new lessons appended at the end (see below).
 
 ## README.md Is Navigation-Only, Never Lesson Content
 
-Superseded decision, corrected after checking the sibling devops repo in
-detail: `README.md` **never** holds lesson content anywhere in this repo,
-matching the devops repo exactly (there, `README.md` only exists at a
-section's own root and inside `03_exercises/`, never inside `01_theory/`).
-Every section used to have its first lesson living in `01_theory/README.md`
-— this was fixed: that content was extracted into a properly named file
-sitting alongside the section's other lessons (`0_lab_setup` →
-`01_theory/01_rules_and_learning.md`, `1_math_and_data` →
-`01_theory/01_vectors_and_linear_model.md`, `2_classical_ml` →
+Superseded decision, corrected after checking the sibling devops repo in detail:
+`README.md` **never** holds lesson content anywhere in this repo, matching the
+devops repo exactly (there, `README.md` only exists at a section's own root and
+inside `03_exercises/`, never inside `01_theory/`). Every section used to have
+its first lesson living in `01_theory/README.md` — this was fixed: that content
+was extracted into a properly named file sitting alongside the section's other
+lessons (`0_lab_setup` → `01_theory/01_rules_and_learning.md`, `1_math_and_data`
+→ `01_theory/01_vectors_and_linear_model.md`, `2_classical_ml` →
 `01_theory/01_classification_basics.md`, `3_neural_networks` →
 `01_theory/01_neurons_and_backprop.md`, `4_nlp_and_transformers` →
 `01_theory/02_attention.md`, `5_llm_applications` →
 `01_theory/01_structured_output.md`, `6_retrieval_and_rag` →
 `01_theory/01_rag_basics.md`, `7_evaluation_and_safety` →
 `01_theory/01_free_text_evaluation.md`, `8_fine_tuning` →
-`01_theory/01_sft_basics.md`, `9_agents_and_tools` → `01_theory/01_tool_calling.md`,
-`10_serving_and_operations` → `01_theory/01_serving_basics.md`,
-`11_multimodal_and_cv` → `01_theory/01_convolutions_basics.md`, `12_capstones` →
+`01_theory/01_sft_basics.md`, `9_agents_and_tools` →
+`01_theory/01_tool_calling.md`, `10_serving_and_operations` →
+`01_theory/01_serving_basics.md`, `11_multimodal_and_cv` →
+`01_theory/01_convolutions_basics.md`, `12_capstones` →
 `01_theory/01_project_workflow.md`), and `01_theory/README.md` was deleted in
-every section — there is no index file at that level, same as devops.
-When adding a new lesson: it always gets its own descriptively-named file in
-`01_theory/`, including the first lesson of a section — never put lesson
-content in a file named `README.md`, at any depth.
+every section — there is no index file at that level, same as devops. When
+adding a new lesson: it always gets its own descriptively-named file in
+`01_theory/`, including the first lesson of a section — never put lesson content
+in a file named `README.md`, at any depth.
 
 ## Granularity Principle — One Lesson, One Concept-Cluster
 
@@ -142,18 +145,22 @@ heading (matching the existing heading style), not scattered through the body.
 
 ## Cross-Reference & Validation Discipline
 
-Sections and lessons link to each other and to labs via relative Markdown
-links (`[text](../other_section/README.md)`, `[next lesson](01_tokenization.md)`).
+Sections and lessons link to each other and to labs via relative Markdown links
+(`[text](../other_section/README.md)`, `[next lesson](01_tokenization.md)`).
 After any structural change (new/renamed/moved lesson, split file, section
 reorg), re-verify repo-wide, not just the touched files:
 
 1. **Relative links resolve** — glob `*.md` (excluding `.venv`/`__pycache__`),
    regex `\]\(([^)]+)\)`, skip `http(s)://`/`mailto:`, resolve each with
    `os.path.normpath(os.path.join(dirname, link))`, assert `os.path.exists`.
-   Includes links into sibling repos in this series (`../5_devops_sre_
-   knowledgebase/...`, `../4_python_my_knowledgebase/...`, `../3_go_my_
-   knowledgebase/...`) — verify the target section number still exists in
-   that sibling repo; numbering drifts there independently of this repo.
+   Links into sibling repos are NOT relative: use canonical GitHub URLs,
+   same as the sibling repos (decided 2026-11-04):
+   `https://github.com/krasnosvar/<repo>/tree/main/<dir>/` for directories,
+   `.../blob/main/<file>` for files. Relative `../4_python_...` links break
+   on GitHub because each repo is published separately. Verify the target
+   still exists in the local sibling checkout (strip the URL prefix and
+   check the path under `../<repo>/`); numbering drifts there
+   independently of this repo.
 2. **Fence balance** — `grep -c '^```'` even in every touched `.md`.
 3. **`<details>`/`<summary>`/`</details>` balance** — counts of all three
    match in every touched lesson file.
@@ -264,7 +271,8 @@ one home — later lessons give a one-line gloss and link there:
 - PyTorch basics (tensor, autograd, `nn.Linear`, `nn.Module`, optimizer,
   DataLoader) → `3_neural_networks/01_theory/02_pytorch_basics.md`
   (old 02–04 shifted to 03–05);
-- stable softmax (subtract max) → `3_neural_networks/01_theory/01_neurons_and_backprop.md`;
+- stable softmax (subtract max) →
+  `3_neural_networks/01_theory/01_neurons_and_backprop.md`;
 - conv output size, kernel/padding/stride, out_channels →
   `11_multimodal_and_cv/01_theory/01_convolutions_basics.md`.
 Structure: the over-packed attention lesson was split into
@@ -321,6 +329,33 @@ need local weights, 11 exercise blocks.
 - Profiles in root README: CPU, MODEL, EMBEDDING, GPU extension.
 - Inventory now: 44 lessons, 125 lesson self-check questions + 5 review
   questions; example/exercise counts unchanged.
+
+## What the 2026-11-04 Expansion Added (keep consistent)
+
+Owner asked why the math is needed and to fill 2026 LLM-engineering gaps.
+- Math: `00_why_math.md` (concept → where an LLM engineer meets it → what
+  breaks); every math lesson ends with `## Где это встретится` (forward
+  links); LLM bridges: cosine search (01), standard error of a proportion
+  for prompt A/B (03), logits→softmax→temperature→logprobs→perplexity (05);
+  optional parts marked «можно вернуться позже» / «Для любопытных».
+- New homes: prompt/context engineering → `5/.../03_prompting_and_context`;
+  tokens, cost, prompt caching in APIs, batch → `5/.../04_api_tokens_cost_
+  caching`; llama.cpp/Ollama/LM Studio → `5/.../05_local_runtimes`; ANN,
+  FAISS, pgvector, vector DBs → `6/.../04_vector_stores`; LLM-as-judge
+  biases/calibration → `7/.../04_llm_as_judge` (kappa stays in 03); prompt
+  injection & guardrails → `7/.../05_guardrails_and_injection`; MCP →
+  `9/.../03_mcp` (01_tool_calling keeps a gloss); multi-agent & memory →
+  `9/.../04_multi_agent_and_memory`; LLM observability, traces, OTel →
+  `10/.../04_llm_observability`. All rows are in `other/glossary.md`.
+- New offline examples: `9_agents_and_tools/02_examples/04_mcp_toy.py`,
+  `10_serving_and_operations/02_examples/04_trace.py`.
+- Facts not re-checked against live docs: default local ports (llama-server
+  8080, Ollama 11434, LM Studio 1234, vLLM 8000), "Q4 ≈ 4.5–5 bits/weight".
+- Inventory now: 54 lessons, 174 lesson self-check questions + 5 review
+  questions, 30 CPU examples, 6 that need local weights, 11 exercise blocks.
+- Known leftover: lessons in sections 3–4 still use unlabelled
+  `<summary>Разбор</summary>`; math 04/05 interleave question/answer —
+  normalize in a separate pass.
 
 ## Consolidated Review Block
 
