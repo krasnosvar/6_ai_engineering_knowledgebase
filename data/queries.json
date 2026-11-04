@@ -1,0 +1,90 @@
+[
+  {
+    "id": "q1",
+    "query": "collect application metrics",
+    "relevant": [
+      "d1"
+    ],
+    "tenant": "public",
+    "split": "dev"
+  },
+  {
+    "id": "q2",
+    "query": "key expiration TTL",
+    "relevant": [
+      "d6"
+    ],
+    "tenant": "public",
+    "split": "dev"
+  },
+  {
+    "id": "q3",
+    "query": "HTTP rate limiting",
+    "relevant": [
+      "d8"
+    ],
+    "tenant": "public",
+    "split": "dev"
+  },
+  {
+    "id": "q4",
+    "query": "atlas error budget",
+    "relevant": [
+      "d9"
+    ],
+    "tenant": "team-a",
+    "split": "dev"
+  },
+  {
+    "id": "q5",
+    "query": "container image Docker",
+    "relevant": [
+      "d2"
+    ],
+    "tenant": "public",
+    "split": "test"
+  },
+  {
+    "id": "q6",
+    "query": "infrastructure state bindings",
+    "relevant": [
+      "d4"
+    ],
+    "tenant": "public",
+    "split": "test"
+  },
+  {
+    "id": "q7",
+    "query": "atlas error budget",
+    "relevant": [
+      "d10"
+    ],
+    "tenant": "team-b",
+    "split": "test"
+  },
+  {
+    "id": "q8",
+    "query": "moon cheese forecast",
+    "relevant": [],
+    "tenant": "public",
+    "split": "test"
+  },
+  {
+    "id": "q9",
+    "query": "previous application version rollback",
+    "relevant": [
+      "d12"
+    ],
+    "tenant": "public",
+    "split": "test"
+  },
+  {
+    "id": "q10",
+    "query": "database transactions index",
+    "relevant": [
+      "d7"
+    ],
+    "tenant": "public",
+    "split": "test"
+  }
+]

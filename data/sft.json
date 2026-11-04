@@ -1,0 +1,110 @@
+[
+  {
+    "id": "database-0",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: database connection refused",
+    "answer": "database",
+    "split": "train"
+  },
+  {
+    "id": "database-1",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: sql query is slow",
+    "answer": "database",
+    "split": "train"
+  },
+  {
+    "id": "database-2",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: postgres transaction failed",
+    "answer": "database",
+    "split": "train"
+  },
+  {
+    "id": "database-3",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: database index missing",
+    "answer": "database",
+    "split": "train"
+  },
+  {
+    "id": "database-4",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: sql deadlock detected",
+    "answer": "database",
+    "split": "test"
+  },
+  {
+    "id": "database-5",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: postgres disk full",
+    "answer": "database",
+    "split": "test"
+  },
+  {
+    "id": "network-0",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: dns resolution failed",
+    "answer": "network",
+    "split": "train"
+  },
+  {
+    "id": "network-1",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: network connection timeout",
+    "answer": "network",
+    "split": "train"
+  },
+  {
+    "id": "network-2",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: proxy route missing",
+    "answer": "network",
+    "split": "train"
+  },
+  {
+    "id": "network-3",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: dns record wrong",
+    "answer": "network",
+    "split": "train"
+  },
+  {
+    "id": "network-4",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: network packet loss",
+    "answer": "network",
+    "split": "test"
+  },
+  {
+    "id": "network-5",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: proxy gateway down",
+    "answer": "network",
+    "split": "test"
+  },
+  {
+    "id": "access-0",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: password reset needed",
+    "answer": "access",
+    "split": "train"
+  },
+  {
+    "id": "access-1",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: account permission denied",
+    "answer": "access",
+    "split": "train"
+  },
+  {
+    "id": "access-2",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: login token expired",
+    "answer": "access",
+    "split": "train"
+  },
+  {
+    "id": "access-3",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: password change failed",
+    "answer": "access",
+    "split": "train"
+  },
+  {
+    "id": "access-4",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: account role missing",
+    "answer": "access",
+    "split": "test"
+  },
+  {
+    "id": "access-5",
+    "prompt": "Classify the ticket as database, network or access. Reply with one label. Ticket: login access blocked",
+    "answer": "access",
+    "split": "test"
+  }
+]

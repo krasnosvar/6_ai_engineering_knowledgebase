@@ -1,0 +1,110 @@
+[
+  {
+    "id": "database-0",
+    "text": "database connection refused",
+    "label": "database",
+    "split": "train"
+  },
+  {
+    "id": "database-1",
+    "text": "sql query is slow",
+    "label": "database",
+    "split": "train"
+  },
+  {
+    "id": "database-2",
+    "text": "postgres transaction failed",
+    "label": "database",
+    "split": "train"
+  },
+  {
+    "id": "database-3",
+    "text": "database index missing",
+    "label": "database",
+    "split": "train"
+  },
+  {
+    "id": "database-4",
+    "text": "sql deadlock detected",
+    "label": "database",
+    "split": "test"
+  },
+  {
+    "id": "database-5",
+    "text": "postgres disk full",
+    "label": "database",
+    "split": "test"
+  },
+  {
+    "id": "network-0",
+    "text": "dns resolution failed",
+    "label": "network",
+    "split": "train"
+  },
+  {
+    "id": "network-1",
+    "text": "network connection timeout",
+    "label": "network",
+    "split": "train"
+  },
+  {
+    "id": "network-2",
+    "text": "proxy route missing",
+    "label": "network",
+    "split": "train"
+  },
+  {
+    "id": "network-3",
+    "text": "dns record wrong",
+    "label": "network",
+    "split": "train"
+  },
+  {
+    "id": "network-4",
+    "text": "network packet loss",
+    "label": "network",
+    "split": "test"
+  },
+  {
+    "id": "network-5",
+    "text": "proxy gateway down",
+    "label": "network",
+    "split": "test"
+  },
+  {
+    "id": "access-0",
+    "text": "password reset needed",
+    "label": "access",
+    "split": "train"
+  },
+  {
+    "id": "access-1",
+    "text": "account permission denied",
+    "label": "access",
+    "split": "train"
+  },
+  {
+    "id": "access-2",
+    "text": "login token expired",
+    "label": "access",
+    "split": "train"
+  },
+  {
+    "id": "access-3",
+    "text": "password change failed",
+    "label": "access",
+    "split": "train"
+  },
+  {
+    "id": "access-4",
+    "text": "account role missing",
+    "label": "access",
+    "split": "test"
+  },
+  {
+    "id": "access-5",
+    "text": "login access blocked",
+    "label": "access",
+    "split": "test"
+  }
+]

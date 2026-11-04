@@ -1,0 +1,74 @@
+[
+  {
+    "id": "d1",
+    "tenant": "public",
+    "text": "Prometheus collects application metrics. Use rate for counters.",
+    "topic": "monitoring"
+  },
+  {
+    "id": "d2",
+    "tenant": "public",
+    "text": "Docker packages an application into a container image.",
+    "topic": "containers"
+  },
+  {
+    "id": "d3",
+    "tenant": "public",
+    "text": "Kubernetes restarts a failed container according to its restart policy.",
+    "topic": "containers"
+  },
+  {
+    "id": "d4",
+    "tenant": "public",
+    "text": "Terraform stores infrastructure resource bindings in state.",
+    "topic": "iac"
+  },
+  {
+    "id": "d5",
+    "tenant": "public",
+    "text": "Git stores commits. A branch points to a commit.",
+    "topic": "git"
+  },
+  {
+    "id": "d6",
+    "tenant": "public",
+    "text": "Redis is an in-memory store. TTL sets key expiration.",
+    "topic": "database"
+  },
+  {
+    "id": "d7",
+    "tenant": "public",
+    "text": "PostgreSQL supports transactions. An index can accelerate selective queries.",
+    "topic": "database"
+  },
+  {
+    "id": "d8",
+    "tenant": "public",
+    "text": "An HTTP 429 response signals rate limiting. Retry with backoff and a limit.",
+    "topic": "api"
+  },
+  {
+    "id": "d9",
+    "tenant": "team-a",
+    "text": "The exercise service atlas has an error budget of 43 minutes.",
+    "topic": "sre"
+  },
+  {
+    "id": "d10",
+    "tenant": "team-b",
+    "text": "The exercise service atlas has an error budget of 12 minutes.",
+    "topic": "sre"
+  },
+  {
+    "id": "d11",
+    "tenant": "public",
+    "text": "CPU usage measures processor activity. Memory usage measures occupied RAM.",
+    "topic": "monitoring"
+  },
+  {
+    "id": "d12",
+    "tenant": "public",
+    "text": "A deployment rollback restores a previous application version.",
+    "topic": "release"
+  }
+]
