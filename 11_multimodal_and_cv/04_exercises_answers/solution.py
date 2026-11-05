@@ -37,7 +37,8 @@ def document_accuracy(truth, pred, fields):
         for k in fields:
             # Поле должно присутствовать в обоих словарях и совпасть.
             # Отсутствующее поле — не то же самое, что явный None.
-            if k not in true_row or k not in predicted_row or predicted_row[k] != true_row[k]:
+            if (k not in true_row or k not in predicted_row
+                    or predicted_row[k] != true_row[k]):
                 all_fields_match = False
                 break
         if all_fields_match:

@@ -6,7 +6,7 @@ torch.manual_seed(42)
 torch.set_num_threads(2)
 
 x = torch.tensor([[0., 0.], [0., 1.], [1., 0.], [1., 1.]])  # (4, 2)
-y = torch.tensor([0, 1, 1, 0])                               # (4,) номера классов
+y = torch.tensor([0, 1, 1, 0])                    # (4,) номера классов
 
 model = nn.Sequential(
     nn.Linear(2, 8),   # (4, 2) -> (4, 8)

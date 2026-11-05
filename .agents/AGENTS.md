@@ -13,6 +13,87 @@ new lesson. This file (`AGENTS.md`) captures structural/maintenance
 conventions and lessons learned from auditing the repo; it does not replace
 `PROJECT_TASK.md`'s content rules, it enforces them.
 
+For a beginner-focused course review or rewrite, also use
+`.agents/BEGINNER_REVIEW_PROMPT.md`. General Python is taught in the sibling
+Python repository; link to the specific lesson instead of duplicating it.
+Give a short contextual explanation when needed to understand an example.
+For math restructuring and the section-by-section maintenance process,
+see the same file's sections «План переработки математики» and
+«Фиксация решений по разделам».
+Section 0 is environment setup and Python diagnosis only. Section 1 starts
+with an introduction to ML and why engineers need mathematics, followed by
+mathematical concepts. The section README gives the new lesson order;
+historical paths and counts below describe their original dates.
+
+Latest review: section 1 was split into ordered math lessons. Section 2's
+character n-gram and threshold explanations were corrected. Section 3's
+gradient accumulation snippet is self-contained and its checkpoint example
+restores the optimizer while noting the additional state needed. The RAG
+vector-store lesson distinguishes filtered ANN recall from access control.
+Section 4 qualifies the simplified decoder block, masking and repeatability.
+Section 5 describes prompt caching and batch API benefits as conditional.
+Section 7 distinguishes expected chance agreement from observed causes
+when explaining Cohen's kappa.
+Section 8 distinguishes QLoRA from other quantized training methods and
+does not promise that paged optimizers prevent every out-of-memory error.
+Section 9 distinguishes context from permission isolation, makes unknown
+outcomes explicit for retries and notes MCP responses vary by SDK.
+Section 10 distinguishes static and dynamic KV caches, latency thresholds,
+and overlapping trace spans. Section 11 specifies the convolution formula's
+dilation and distinguishes weights from biases. The MiniLM missing-weights
+message is now Russian. Capstone links and filtered retrieval requirements
+were synchronized with the revised lessons.
+All 30 CPU examples and 11 answer checks passed; six model-backed runs
+remain unverified without local weights. This is not a claim that every
+lesson has received a full pedagogical review.
+
+Sections 0–12 have received a file-by-file beginner review of theory,
+code, exercises, answers and transitions. This does not prove that every
+explanation is complete or correct; continue to fix concrete findings.
+Sections 0–1 have been reviewed; the doctor, diagnosis answer code, math
+examples, lesson code and math answer checks ran successfully. The review
+corrected the softmax explanation and qualified statistical assumptions.
+Section 2 has been reviewed: its three examples, executable lesson blocks
+and answer check passed. The metric check now includes unequal FP and FN;
+the lessons qualify learning-curve conclusions and independent evaluation.
+Section 3 has been reviewed: three examples, executable PyTorch lesson
+blocks and the answer check passed. Training diagnostics and clipping
+assumptions were clarified; the exercise now checks the training mode.
+Section 4 has been reviewed: three CPU examples and the answer check passed.
+The lessons qualify causal order information and perplexity; the exercise
+check covers nonfinite logits and noninteger sequence length.
+Section 5 has been reviewed: two CPU examples, lesson code and answer
+check passed. Cost validation rejects nonfinite prices; model generation
+remains unverified without the weights.
+Section 6 has been reviewed: two CPU examples, the IVF lesson simulation
+and answer check passed. IVF exercise handles an empty corpus and rejects
+fractional cell IDs. RAG generation and dense retrieval await weights.
+Section 7 has been reviewed: three CPU examples, lesson code and answer
+check passed. Coverage terminology, paired intervals and interpretation
+of position bias were clarified.
+Section 8 has been reviewed: two CPU examples and the answer check passed;
+the DPO reference-model explanation was qualified. LLM fine-tuning and
+QLoRA were not run.
+Section 9 has been reviewed: three CPU simulations and the answer check
+passed. Independence and the external-effect crash window were clarified;
+model-based tool selection still awaits weights.
+Section 10 has been reviewed: three CPU examples and the answer check
+passed. Cache effects and overlapping trace spans were clarified; the
+model benchmark remains unverified.
+Section 11 has been reviewed: both CPU examples and the answer check
+passed. The field example now explicitly states its row-order assumption.
+Section 12 has been reviewed: project requirements and the local service
+were read; health, classify and 404 had passed in a local HTTP run.
+The review questions qualify sparse bootstrap and filtered ANN recall.
+Final CPU review: local Markdown links resolve, 129 content Markdown files
+pass the repository style check, and `git diff --check` passes. The style
+check excludes `.agents`: its literal illustrative markup produces known
+false positives. Model-backed experiments still require prepared weights.
+Model and GPU paths were not tested. Preserve existing worktree changes.
+Follow `other/course_review_plan.md` in order, recording each completed
+section and its actual checks there and in this file. Do not mark model
+experiments as executed without prepared weights.
+
 All new content — lesson prose, code comments in examples, exercise text —
 is written in Russian, matching the rest of the repo.
 
@@ -57,8 +138,8 @@ breaks syntax, tables.
   there — this file must stay scannable as a table of contents.
 - **Lesson files inside `01_theory/` get a numeric reading-order prefix**
   (`01_`, `02_`, ...) matching the section's own README "Порядок чтения" list
-  — e.g. `1_math_and_data/01_theory/01_vectors_and_linear_model.md`, `02_
-  gradients.md`, `03_probability_and_data.md`. Real bug found and fixed
+  — e.g. `1_math_and_data/01_theory/03_vectors_and_linear_model.md` and
+  `05_gradients.md`. Real bug found and fixed
   2026-10-13: every section had 2+ lesson files sitting unprefixed, so their
   alphabetical order on disk (what GitHub/a file browser shows with no
   README open) did NOT match actual reading order — a reader browsing the
@@ -69,9 +150,9 @@ breaks syntax, tables.
   an existing section, insert it at the right position and renumber
   everything after it (both the files and the README's list) rather than
   appending out of order at the end.
-  Exception (2026-11-04): `1_math_and_data/01_theory/00_why_math.md` is an
-  orientation lesson placed before `01_` without renumbering; sections 5,
-  6, 7, 9, 10 got new lessons appended at the end (see below).
+  Exception: `1_math_and_data/01_theory/00_rules_and_learning.md` is an
+  orientation lesson placed before `01_`; sections 5, 6, 7, 9, 10 got
+  new lessons appended at the end (see below).
 
 ## README.md Is Navigation-Only, Never Lesson Content
 
@@ -117,25 +198,29 @@ into it and structurally can't fit a worked-by-hand example for each one.
 
 ## Self-Check Questions — Scale the Block to the Lesson's Density
 
-Every lesson ends with self-check question(s) in collapsible form:
+Every lesson ends with a numbered list of self-check questions under
+`## Проверить понимание`, followed by a plain Markdown answer per question:
 
 ```markdown
-<details>
-<summary>Разбор</summary>
+### Разбор вопроса 1
 
 Развёрнутый разбор ответа объясняющим текстом...
 
-</details>
 ```
+
+Do not use HTML `<details>` or `<summary>` blocks: lessons must be easy
+to read as raw Markdown in an IDE or terminal. Answers remain visible.
+Convert old collapsible blocks when editing their lesson; preserve answers
+and their correspondence to questions.
 
 **This is a different genre from the devops repo's "Interview Q&A" section**
 (bold question + italic `*Ответ:*`, ~10 exam-style questions) — do not import
 that format here. This repo's questions are self-check prompts for a learner
 mid-lesson, phrased to invite the reader to answer in their own words before
-revealing the breakdown (see root README "Как читать материал").
+reading the breakdown (see root README "Как читать материал").
 
 That said: **one question per lesson is a floor, not a fixed count.** Scale
-the number of `<details>` blocks to how many genuinely distinct ideas the
+the number of answers to how many genuinely distinct ideas the
 lesson introduces — a short, single-concept lesson can have one question; a
 lesson covering several ideas (even after applying the Granularity Principle
 above) should end with a real block of 2-5 self-check questions, each
@@ -162,8 +247,8 @@ reorg), re-verify repo-wide, not just the touched files:
    check the path under `../<repo>/`); numbering drifts there
    independently of this repo.
 2. **Fence balance** — `grep -c '^```'` even in every touched `.md`.
-3. **`<details>`/`<summary>`/`</details>` balance** — counts of all three
-   match in every touched lesson file.
+3. **Self-check answers** — use ordinary Markdown headings and match every
+   question with its answer; do not add collapsible HTML blocks.
 4. **No trailing whitespace / stray mixed-script glyphs** — same checks as
    the sibling devops repo: `grep -rnE ' +$'`,
    `grep -nP '[\x{4e00}-\x{9fff}]'`.
@@ -208,7 +293,7 @@ hand — run the examples you touched (`uv run python <path>`), run
 `03_exercises/check.py` (fails with `NotImplementedError`) and
 `03_exercises/check.py --answers` (passes) in each touched section, smoke-test
 `12_capstones/02_examples/01_ticket_service.py` with curl (health, classify,
-404) if you touch it, and run the link/fence/details checks above. The
+404) if you touch it, and run the link, fence and answer checks above. The
 per-section `03_exercises/check.py` files are the exercises' own self-check,
 not repo tooling — they stay. The `02_examples/`, `03_exercises/` and
 `04_exercises_answers/` READMEs stay too: they carry content (run commands +
@@ -243,28 +328,25 @@ They apply here just as much — this repo is a from-zero course too:
   bugs found only by running: a missing import, a framework parameter read
   from the wrong place, an example that didn't demonstrate what the prose
   claimed (a coverage example — fixed and verified with the real tool).
-- **Links into sibling repos must not be the only explanation of a
-  prerequisite.** A reader may not have that repo; two such pointers in the
-  Python repo were dead ends. Explain inline (even briefly) and treat the
-  sibling link as "подробнее".
+- **General Python prerequisites live in the sibling Python repo.** Link to
+  the specific lesson and briefly explain the construct in context if needed.
+  AI, math and library concepts must still be explained in this course.
 - **Mixed Latin+Cyrillic words** are a recurring artifact ("коммit",
   "formы", "corutina", "momент"). Scan in addition to the CJK scan:
   `grep -rnoP '\b\w*(?:[а-яё][a-z]|[a-z][а-яё])\w*\b' --include='*.md'
   --include='*.py' .` — review hits by hand (escapes like `\nчисло` inside a
   string are legit).
   The only expected hits are the examples in this paragraph itself.
-- Internals that only a curious reader needs go into a `<details>` block
-  labelled "Для любопытных" so the main path stays readable.
+- Put optional internals under a normal Markdown heading "Для любопытных".
 
 ## What the 2026-10-14 Full Audit Fixed Here (homes to link, not re-explain)
 
 A full read of every lesson + running every script found the same gap class
 as in the Python repo: concepts used everywhere, taught nowhere. Each now has
 one home — later lessons give a one-line gloss and link there:
-- minimal Python (functions, collections, `zip`/`enumerate`, `lambda`,
-  `raise`/`try`, `class`/`self`, `with open`, `import`) →
-  `0_lab_setup/python_minimum.md` (reference page, not a numbered lesson;
-  the entry diagnostic now also checks exceptions and classes);
+- Python topic navigation → `0_lab_setup/python_minimum.md`, diagnostic →
+  `0_lab_setup/03_exercises/README.md`;
+  general Python explanations belong in the sibling Python repository;
 - NumPy shapes/axes, broadcasting, matrix×matrix, standardization, (B,T,D) →
   `1_math_and_data/01_theory/04_arrays_and_axes.md`;
 - `exp`/`ln`, sigmoid, `-ln(p)` → `1_math_and_data/01_theory/05_exp_and_log.md`;
@@ -295,14 +377,10 @@ need local weights, 11 exercise blocks.
 
 ## What the 2026-10-14 Review Pass Changed (keep consistent)
 
-- **Self-check format is uniform repo-wide:** under `## Проверить
-  понимание...` a numbered list of questions, then one
-  `<summary>Разбор вопроса N</summary>` block per question, same order (the
-  section 10/11 format). Never several questions in one paragraph followed
-  by unlabelled "Разбор" blocks. Where one answer covered two sub-questions,
-  they were merged into one numbered item. Quick detector: no file may match
-  `</details>\s*<details>` together with an unlabelled
-  `<summary>Разбор</summary>`.
+- **Self-check format:** under `## Проверить понимание...`, use a numbered
+  list of questions followed by `### Разбор вопроса N` for each answer in
+  the same order. Do not use HTML collapsible blocks. Existing blocks are
+  legacy and should be converted when the lesson is edited.
 - **Glossary:** the "term → lesson" table lives in `other/glossary.md`
   (linked from root README), not in `other/sources.md`. When a new concept
   gets a home lesson, add a row there.
@@ -321,8 +399,8 @@ need local weights, 11 exercise blocks.
   defined in `01_serving_basics.md`.
 - `apply_chat_template(..., return_tensors='pt')` calls whose result is used
   as a tensor pass `return_dict=False` explicitly (default may change in
-  future Transformers). Exception still pending: the dense
-  `8_fine_tuning/02_examples/02_train_adapter.py` (not yet rewritten).
+  future Transformers). `8_fine_tuning/02_examples/02_train_adapter.py`
+  was rewritten into functions on 2026-11-05 and follows this rule.
 - Capstone timing (one statement everywhere): classifier CPU-baseline after
   section 2, document assistant after 7, classifier model parts after 8,
   diagnostic agent after 9–10.
@@ -351,7 +429,7 @@ Owner asked why the math is needed and to fill 2026 LLM-engineering gaps.
   `10_serving_and_operations/02_examples/04_trace.py`.
 - Facts not re-checked against live docs: default local ports (llama-server
   8080, Ollama 11434, LM Studio 1234, vLLM 8000), "Q4 ≈ 4.5–5 bits/weight".
-- Inventory now: 54 lessons, 174 lesson self-check questions + 9 review
+- Inventory then: 54 lessons, 174 lesson self-check questions + 9 review
   questions, 30 CPU examples, 6 that need local weights, 11 exercise blocks
   with 37 programmable functions (`raise NotImplementedError` in task.py).
 - Exercises were extended in sections 1, 5, 6, 7, 9, 10 (14 new functions)
@@ -359,9 +437,47 @@ Owner asked why the math is needed and to fill 2026 LLM-engineering gaps.
   injection cases, judge calibration, MCP-style boundary, traces; review
   questions 6–9 span the new lessons; competencies matrix has a section
   «Свидетельства в прикладных темах».
-- Known leftover: lessons in sections 3–4 still use unlabelled
-  `<summary>Разбор</summary>`; math 04/05 interleave question/answer —
-  normalize in a separate pass.
+- The 3–4 / math 04–05 self-check format leftover was fixed on 2026-11-05.
+
+## What the 2026-11-05 Beginner Rework Changed (keep consistent)
+
+Task: `.agents/BEGINNER_REVIEW_PROMPT.md`, full audit of sections 0–12.
+- Root README now starts with who the course is for, required Python,
+  concrete outcomes, a short AI/ML/NLP/LLM gloss, the theory → example →
+  exercise route, hardware, and when weights are needed (sections 0–4
+  need none). Course counts live near the section list.
+- `0_lab_setup/python_minimum.md` is navigation only: tables «тема → где
+  в курсе → урок Python-базы» (required / can wait). It explains only
+  `zip`/`enumerate`, because the Python repo has no lesson on them. The
+  diagnostic (`0_lab_setup/03_exercises/`) links each item to its Python
+  lesson; learners write in `artifacts/diagnostic.py`.
+- AI/ML/NN/NLP/LLM/CV home: `0_lab_setup/01_theory/01_rules_and_learning.md`.
+- `1_math_and_data/01_theory/00_why_math.md` now starts from the ticket-
+  time task (data, prediction, measurement, error, parameters, MAE,
+  variants A/B/C); the LLM «future map» table is at the end, marked
+  optional. Lesson 01 opens with a reminder instead of re-introducing ŷ.
+- Softmax home moved to `1_math_and_data/01_theory/05_exp_and_log.md`
+  (basic softmax on [2, 1, 0]); `2_classical_ml/.../01` only reminds;
+  stable softmax stays in `3_neural_networks/.../01`.
+- train/validation/test are first named in math 03 (short), taught in
+  `2_classical_ml/01_theory/02_model_selection.md`.
+- Every `02_examples/README.md` states: after which lesson, idea, input
+  data, command, profile, how to read output, what it proves / does not
+  prove, one experiment with a prediction (experiments checked by running
+  copies). Every `03_exercises/README.md`: lesson, given, task, where to
+  write, how to check, meaning of NotImplementedError / ValueError.
+  Answers show reasoning and typical mistakes.
+- Every lesson self-check uses the numbered list + «Разбор вопроса N».
+- Inventory now: 54 lessons, 202 lesson self-check questions + 9 review
+  questions, 30 CPU examples, 6 that need local weights, 11 exercise
+  blocks with 37 programmable functions.
+- Not verified against live docs: MCP `notifications/initialized` and
+  -32602 for unknown tool, QLoRA paper numbers (block 64, double quant),
+  local runtime ports, «lost in the middle is weaker in newer models»,
+  «hidden reasoning tokens billed as output». Model examples were not run
+  with weights. Remaining English messages: `MiniLM absent` in
+  `6_retrieval_and_rag/02_examples/03_dense_hybrid.py` and English
+  `TODO:` texts in most `task.py`.
 
 ## Consolidated Review Block
 
@@ -384,3 +500,9 @@ outside the numbered reading order.
   sessions, unless the user has explicitly said otherwise for a given task.
 - Never create git worktrees for routine edits here.
 - Do not commit without explicit instruction.
+
+## Каталоги tests
+
+Не создавай каталоги с именем `tests` в репозиториях этой серии.
+Не удаляй проверки: размещай их рядом с проверяемыми файлами или
+в существующих упражнениях и обновляй команды и CI при переносе.

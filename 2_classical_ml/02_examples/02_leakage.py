@@ -27,7 +27,8 @@ def evaluate(train, test):
     return correct / len(test)
 
 
-# 1. Случайное разбиение СТРОК: строки одного клиента попадают и в train, и в test.
+# 1. Случайное разбиение СТРОК: строки одного клиента попадают и в train,
+#    и в test.
 shuffled = rows[:]
 rng.shuffle(shuffled)
 cut = int(len(shuffled) * 0.75)
@@ -42,8 +43,8 @@ group_test = [r for r in rows if r[0] in test_groups]
 
 a = evaluate(row_train, row_test)
 b = evaluate(group_train, group_test)
-print(f'Разбиение по строкам: {share_seen:.0%} test-строк от знакомых клиентов, '
-      f'accuracy={a:.3f}')
+print(f'Разбиение по строкам: {share_seen:.0%} test-строк от знакомых '
+      f'клиентов, accuracy={a:.3f}')
 print(f'Разбиение по клиентам: 0% знакомых клиентов, accuracy={b:.3f}')
 print('Высокая оценка в первом случае — запоминание ID, а не закономерность.')
 assert a > 0.95 and b < 0.7

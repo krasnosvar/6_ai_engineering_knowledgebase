@@ -22,12 +22,14 @@ model = nn.Sequential(
     nn.Conv2d(1, 8, 3, padding=1),  # 8 ядер 3x3; padding=1 сохраняет размер 8x8
     nn.ReLU(),
     nn.Flatten(),
-    nn.Linear(8 * 8 * 8, 10),       # 512 входов -> 10 logits, по одному на цифру
+    # 512 входов -> 10 logits, по одному на цифру.
+    nn.Linear(8 * 8 * 8, 10),
 )
 opt = torch.optim.Adam(model.parameters(), lr=.01)
 
 for _ in range(8):  # 8 эпох
-    # Каждую эпоху перемешиваем номера обучающих примеров и режем на группы по 64.
+    # Каждую эпоху перемешиваем номера обучающих примеров
+    # и режем на группы по 64.
     indices = torch.tensor(train)[torch.randperm(len(train))]
     for batch in indices.split(64):
         opt.zero_grad()

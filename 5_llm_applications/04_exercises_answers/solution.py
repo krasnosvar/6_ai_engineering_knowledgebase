@@ -1,4 +1,5 @@
 import json
+import math
 
 ALLOWED_LABELS = ('database', 'network', 'access', 'unknown')
 
@@ -20,7 +21,7 @@ def parse_ticket(raw):
     if obj['label'] not in ALLOWED_LABELS:
         raise ValueError('Invalid label')
 
-    # Цены за 1 млн токенов: ровно три ключа, без цен «по умолчанию».
+    # Слой 4 (смысл) здесь не проверить: для него нужен правильный ответ.
     return obj
 
 
@@ -53,8 +54,9 @@ def call_cost(input_tokens, output_tokens, cached_tokens, prices):
     if not isinstance(prices, dict) or set(prices) != PRICE_KEYS:
         raise ValueError('Prices need input, cached_input, output')
     for price in prices.values():
-        if type(price) not in (int, float) or price < 0:
-            raise ValueError('Price must be a nonnegative number')
+        if (type(price) not in (int, float) or price < 0
+                or not math.isfinite(price)):
+            raise ValueError('Price must be a finite nonnegative number')
 
     fresh = input_tokens - cached_tokens
     return (fresh * prices['input']

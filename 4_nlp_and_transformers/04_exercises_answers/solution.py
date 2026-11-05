@@ -2,7 +2,7 @@ import math
 
 
 def softmax(values):
-    # Пустой список или нечисловые бесконечности/NaN делают результат бессмысленным.
+    # Пустой список, бесконечности и NaN делают результат бессмысленным.
     if not values:
         raise ValueError('Finite nonempty logits required')
     for v in values:

@@ -3,15 +3,18 @@
 
 def execute(action):
     """Выполняет действие, только если оно в точности разрешено."""
-    # isinstance(x, dict) — «x является словарём». set(action) — множество ключей.
-    if not isinstance(action, dict) or set(action) != {'tool', 'arguments'}:
+    # isinstance(x, dict) — «x является словарём»; set(action) — его ключи.
+    if (not isinstance(action, dict)
+            or set(action) != {'tool', 'arguments'}):
         raise ValueError('Invalid action schema')
     if action['tool'] != 'read_metrics':
         raise ValueError('Tool is not allowed')
     args = action['arguments']
-    if not isinstance(args, dict) or set(args) != {'service'} or args['service'] != 'demo':
+    if (not isinstance(args, dict) or set(args) != {'service'}
+            or args['service'] != 'demo'):
         raise ValueError('Only the demo service is authorized')
-    return {'service': 'demo', 'error_rate': 0.15, 'source': 'synthetic fixture'}
+    return {'service': 'demo', 'error_rate': 0.15,
+            'source': 'synthetic fixture'}
 
 
 def run(actions, max_steps=2):
@@ -33,6 +36,8 @@ def run(actions, max_steps=2):
 if __name__ == '__main__':
     good = {'tool': 'read_metrics', 'arguments': {'service': 'demo'}}
     assert run([good])['status'] == 'completed'
-    assert run([good] * 3)['status'] == 'budget_exhausted'   # 3 шага при лимите 2
-    assert run([{'tool': 'shell', 'arguments': {'cmd': 'anything'}}])['status'] == 'rejected'
+    # 3 шага при лимите 2.
+    assert run([good] * 3)['status'] == 'budget_exhausted'
+    shell = {'tool': 'shell', 'arguments': {'cmd': 'anything'}}
+    assert run([shell])['status'] == 'rejected'
     print(run([good]))

@@ -4,7 +4,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 import json
 
-ROOT = Path(__file__).resolve().parents[2]  # корень репы: здесь data/ и artifacts/
+# Корень репы: здесь data/ и artifacts/.
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def data(name):
@@ -16,15 +17,18 @@ def search(query, tenant, k=3):
     # Права доступа ДО поиска: только общие документы и документы своей команды.
     docs = [d for d in data('documents') if d['tenant'] in ('public', tenant)]
 
-    # TF-IDF: каждый документ -> вектор весов слов.
+    # TF-IDF: каждый документ -> вектор весов слов длины 1 (norm='l2'
+    # по умолчанию). Словарь строится по видимым документам этого запроса.
     vectorizer = TfidfVectorizer()
     x = vectorizer.fit_transform([d['text'] for d in docs])
 
-    # Оценка документа = скалярное произведение его вектора с вектором запроса.
+    # Оценка документа = скалярное произведение его вектора с вектором
+    # запроса; векторы длины 1, поэтому это косинусное сходство.
     scores = (x @ vectorizer.transform([query]).T).toarray().ravel()
 
     # argsort(-scores): номера документов по убыванию оценки; берём первые k.
     order = np.argsort(-scores, kind='stable')[:k]
+    # score 0 — нет ни одного общего слова; такой документ не возвращаем.
     return [(docs[i], float(scores[i])) for i in order if scores[i] > 0]
 
 
@@ -42,4 +46,6 @@ if __name__ == '__main__':
             print(q['id'], 'unanswerable; returned=', found)
         # Ни один найденный документ не принадлежит чужой команде.
         assert all(d['tenant'] in ('public', q['tenant']) for d, _ in hits)
-    print('Toy aggregate recall (split-specific reports belong in exercises):', sum(values) / len(values))
+    # Среднее по dev и test вместе: только проверка механики. Отдельный
+    # отчёт по dev — задание 3 упражнений.
+    print('Toy aggregate recall@3 (dev+test):', sum(values) / len(values))

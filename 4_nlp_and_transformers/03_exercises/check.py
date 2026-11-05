@@ -44,8 +44,11 @@ assert m.causal_allowed(3) == [
 
 expect_value_error(lambda: m.softmax([]))
 expect_value_error(lambda: m.softmax([float('inf')]))
+expect_value_error(lambda: m.softmax([float('-inf')]))
+expect_value_error(lambda: m.softmax([float('nan')]))
 expect_value_error(lambda: m.causal_allowed(0))
 expect_value_error(lambda: m.causal_allowed(True))  # bool — не число позиций
+expect_value_error(lambda: m.causal_allowed(1.5))
 
 mode = 'answers' if options.answers else 'student'
 print('PASS:', source.parent.parent.name, mode)

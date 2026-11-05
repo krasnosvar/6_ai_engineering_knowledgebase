@@ -29,4 +29,5 @@ assert simulate([429, 503, 200])['status'] == 'ok'
 assert len(simulate([401, 200])['trace']) == 1
 assert len(simulate([503] * 10)['trace']) == 3
 print(simulate([429, 503, 200]))
-print('Real client also needs timeout, Retry-After handling, jitter and cancellation.')
+print('Real client also needs timeout, Retry-After handling, jitter '
+      'and cancellation.')

@@ -5,9 +5,12 @@ truth = [
     {'id': 'c', 'date': '2026-03-04', 'amount': '300.00'},
 ]
 pred = [
-    {'id': 'a', 'date': '2026-01-02', 'amount': '100.00'},  # всё верно
-    {'id': 'b', 'date': '2026-03-02', 'amount': '200.00'},  # перепутаны день и месяц
-    {'id': 'c', 'date': '2026-03-04', 'amount': '30.00'},   # потерян ноль в сумме
+    # всё верно:
+    {'id': 'a', 'date': '2026-01-02', 'amount': '100.00'},
+    # перепутаны день и месяц:
+    {'id': 'b', 'date': '2026-03-02', 'amount': '200.00'},
+    # потерян ноль в сумме:
+    {'id': 'c', 'date': '2026-03-04', 'amount': '30.00'},
 ]
 fields = ('date', 'amount')
 
@@ -26,5 +29,6 @@ for p, t in zip(pred, truth):
         correct_documents += 1
 document_accuracy = correct_documents / len(truth)
 
-print('field accuracy:', field_accuracy, 'fully correct documents:', document_accuracy)
+print('field accuracy:', field_accuracy,
+      'fully correct documents:', document_accuracy)
 assert document_accuracy < field_accuracy

@@ -4,7 +4,8 @@ from transformers import AutoTokenizer, AutoModel
 from sklearn.feature_extraction.text import TfidfVectorizer
 import json
 
-ROOT = Path(__file__).resolve().parents[2]  # корень репы: здесь data/ и artifacts/
+# Корень репы: здесь data/ и artifacts/.
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def data(name):
@@ -14,19 +15,30 @@ def data(name):
 
 path = ROOT / 'artifacts/models/minilm'
 if not (path / 'config.json').exists():
-    raise SystemExit('MiniLM absent. See data/models.md; no automatic download.')
+    raise SystemExit('Модель MiniLM отсутствует. См. data/models.md; '
+                     'автоматическое скачивание отключено.')
 torch.set_num_threads(2)
-tok = AutoTokenizer.from_pretrained(path, local_files_only=True, trust_remote_code=False)
-model = AutoModel.from_pretrained(path, local_files_only=True, trust_remote_code=False).eval()
+tok = AutoTokenizer.from_pretrained(
+    path, local_files_only=True, trust_remote_code=False)
+model = AutoModel.from_pretrained(
+    path, local_files_only=True, trust_remote_code=False).eval()
 
 
 def encode(texts):
-    """Embedding текста: masked mean векторов токенов, затем нормализация до длины 1."""
-    inputs = tok(texts, padding=True, truncation=True, max_length=256, return_tensors='pt')
+    """Embedding текста: среднее векторов реальных токенов, длина 1.
+
+    Тот же расчёт, что в уроке 03_ranking: [1,3] и [3,1] -> [2,2] ->
+    [0.707, 0.707]; позиции padding в среднее не входят.
+    """
+    inputs = tok(texts, padding=True, truncation=True, max_length=256,
+                 return_tensors='pt')
     with torch.inference_mode():
-        hidden = model(**inputs).last_hidden_state          # (тексты, токены, d)
-        mask = inputs['attention_mask'].unsqueeze(-1)        # 1 — реальный токен, 0 — padding
-        pooled = (hidden * mask).sum(1) / mask.sum(1)        # среднее только по реальным
+        # (тексты, токены, d): вектор каждой позиции.
+        hidden = model(**inputs).last_hidden_state
+        # 1 — реальный токен, 0 — padding; форма (тексты, токены, 1).
+        mask = inputs['attention_mask'].unsqueeze(-1)
+        # Сумма по оси токенов только реальных позиций / их число.
+        pooled = (hidden * mask).sum(1) / mask.sum(1)
         return torch.nn.functional.normalize(pooled, p=2, dim=1)
 
 
@@ -57,4 +69,5 @@ for ranking in rankings:
 print('dense:', rankings[0][:3])
 print('lexical:', rankings[1][:3])
 print('RRF:', sorted(fused, key=lambda key: (-fused[key], key))[:3])
-print('Expected source: d8. Evaluate on more than one query before selecting a method.')
+print('Expected source: d8. '
+      'Evaluate on more than one query before selecting a method.')

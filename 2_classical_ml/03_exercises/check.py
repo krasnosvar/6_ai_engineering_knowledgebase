@@ -35,6 +35,9 @@ assert r == {'precision': .5, 'recall': .5, 'f1': .5}
 assert m.binary_metrics([0, 1], [0, 0]) == {
     'precision': 0., 'recall': 0., 'f1': 0.}
 assert m.binary_metrics([1, 0], [1, 0])['f1'] == 1
+asymmetric = m.binary_metrics([1, 1, 0, 0], [1, 0, 1, 1])
+assert asymmetric['precision'] == 1 / 3
+assert asymmetric['recall'] == 1 / 2
 
 # Общие группы в train и test — признак утечки.
 assert m.group_overlap(['a', 'b'], ['b', 'c']) == {'b'}

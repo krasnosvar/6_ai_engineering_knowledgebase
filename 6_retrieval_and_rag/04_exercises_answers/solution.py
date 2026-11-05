@@ -29,12 +29,14 @@ def rrf(rankings, k=60):
         raise ValueError('Positive k required')
     result = {}
     for ranking in rankings:
-        # set убирает повторы: если длина уменьшилась, какой-то ID встретился дважды.
+        # set убирает повторы: если длина уменьшилась, какой-то ID
+        # встретился дважды.
         if len(set(ranking)) != len(ranking):
             raise ValueError('Duplicate ID in ranking')
         # enumerate(ranking, 1) нумерует с 1: (1, 'a'), (2, 'b'), ...
         for rank, doc in enumerate(ranking, 1):
-            # result.get(doc, 0): текущая сумма документа или 0, если его ещё нет.
+            # result.get(doc, 0): текущая сумма документа или 0,
+            # если его ещё нет.
             result[doc] = result.get(doc, 0) + 1 / (k + rank)
     return result
 
@@ -65,7 +67,9 @@ def ivf_candidates(query, centers, cell, n_probe):
     n_cells = centers.shape[0]
     if type(n_probe) is not int or not 1 <= n_probe <= n_cells:
         raise ValueError('n_probe must be from 1 to number of cells')
-    if cell.ndim != 1 or cell.min() < 0 or cell.max() >= n_cells:
+    if (cell.ndim != 1 or (cell.size and
+            (not np.issubdtype(cell.dtype, np.integer)
+             or cell.min() < 0 or cell.max() >= n_cells))):
         raise ValueError('cell must hold a center index for each document')
 
     # Векторы нормированы, поэтому сходство — скалярное произведение:

@@ -43,7 +43,7 @@ for args in [([], []), ([0, 0], [1, 2]), ([1], [1, 2])]:
     expect_value_error(lambda args=args: m.cosine(*args))
 expect_value_error(lambda: m.mse_gradient(0, 0, [1], []))
 
-# Softmax с температурой: числа из таблицы урока 05.
+# Softmax с температурой: числа из таблицы урока 16.
 for t, expected in [(0.5, [0.867, 0.117, 0.016]),
                     (1, [0.665, 0.245, 0.090]),
                     (2, [0.506, 0.307, 0.186])]:
@@ -60,7 +60,7 @@ assert m.softmax_with_temperature([5], 0.1) == [1.0]
 for args in [([], 1), ([1, 2], 0), ([1, 2], -1)]:
     expect_value_error(lambda args=args: m.softmax_with_temperature(*args))
 
-# Perplexity: пример урока 05 и уверенная модель (все p = 1).
+# Perplexity: пример урока 16 и уверенная модель (все p = 1).
 assert abs(m.perplexity([0.5, 0.25, 0.8]) - 10 ** (1 / 3)) < 1e-9
 assert m.perplexity([1, 1, 1]) == 1.0
 # Четыре равновероятных варианта на каждом шаге — perplexity 4.

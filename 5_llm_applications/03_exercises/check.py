@@ -62,6 +62,8 @@ bad_costs = (
     (100, 10, 0, {'input': 1.0, 'output': 4.0}),    # нет цены кэша
     (100, 10, 0, dict(PRICES, output=-4.0)),        # отрицательная цена
     (100, 10, 0, dict(PRICES, output='4')),         # цена строкой
+    (100, 10, 0, dict(PRICES, output=float('nan'))),  # не конечная цена
+    (100, 10, 0, dict(PRICES, output=float('inf'))),
 )
 for args in bad_costs:
     expect_value_error(lambda args=args: m.call_cost(*args))

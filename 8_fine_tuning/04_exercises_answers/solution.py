@@ -1,5 +1,5 @@
 def _is_token_id(value):
-    # Точная проверка типа: True/False — тоже int в Python, но токеном не являются.
+    # Точная проверка типа: True/False — тоже int в Python, но не токены.
     return type(value) is int and value >= 0
 
 

@@ -19,8 +19,9 @@ class TinyLM(nn.Module):
         self.token = nn.Embedding(len(chars), 32)  # таблица embeddings токенов
         self.pos = nn.Embedding(block, 32)          # обучаемый вектор позиции
         # Один блок Transformer: d_model=32, 4 головы, feed-forward шириной 64.
-        self.layer = nn.TransformerEncoderLayer(32, 4, 64, dropout=0, batch_first=True)
-        self.head = nn.Linear(32, len(chars))       # logits всех символов словаря
+        self.layer = nn.TransformerEncoderLayer(32, 4, 64, dropout=0,
+                                                batch_first=True)
+        self.head = nn.Linear(32, len(chars))       # logits всех символов
 
     def forward(self, x):
         t = x.shape[1]
@@ -41,18 +42,21 @@ for step in range(100):
 
     opt.zero_grad()
     logits = model(x)
-    loss = nn.functional.cross_entropy(logits.reshape(-1, len(chars)), y.reshape(-1))
+    loss = nn.functional.cross_entropy(logits.reshape(-1, len(chars)),
+                                       y.reshape(-1))
     loss.backward()
     opt.step()
     losses.append(loss.item())
 
 model.eval()
 with torch.inference_mode():
-    # Проверка маски: меняем последний символ — предсказания для ранних позиций те же.
+    # Проверка маски: меняем последний символ — предсказания для ранних
+    # позиций остаются теми же.
     probe = seq[:block].unsqueeze(0)
     changed = probe.clone()
     changed[:, -1] = (changed[:, -1] + 1) % len(chars)
-    assert torch.allclose(model(probe)[:, :-1], model(changed)[:, :-1], atol=1e-5)
+    assert torch.allclose(model(probe)[:, :-1], model(changed)[:, :-1],
+                          atol=1e-5)
 
     # Greedy-генерация: каждый раз берём самый вероятный следующий символ.
     context = torch.tensor([[ids[c] for c in 'metrics ']])

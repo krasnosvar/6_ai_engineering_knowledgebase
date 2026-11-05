@@ -1,7 +1,7 @@
 """Миниатюрный BPE на символах слов; не production byte-level tokenizer."""
 from collections import Counter
 
-# Корпус: слово -> сколько раз оно встретилось (тот же, что в ручном разборе урока).
+# Корпус: слово -> сколько раз оно встретилось (как в ручном разборе урока).
 words = {'low': 5, 'lower': 2, 'newest': 6, 'widest': 3}
 
 # Каждое слово разбиваем на символы и добавляем маркер конца слова '</w>'.
@@ -58,4 +58,5 @@ for word in ('lowest', 'newest'):
     assert ''.join(tokens).removesuffix('</w>') == word
     print(word, '=>', tokens)
 
-print('Production tokenizers also need byte coverage, normalization and special tokens.')
+print('Production tokenizers also need byte coverage, normalization '
+      'and special tokens.')

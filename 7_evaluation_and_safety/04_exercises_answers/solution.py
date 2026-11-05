@@ -10,8 +10,10 @@ def slice_accuracy(rows):
         if type(row['correct']) is not bool:
             raise ValueError('correct must be bool')
         key = row['slice']
-        counts[key] = counts.get(key, 0) + 1          # .get: 0, если ключа ещё нет
-        successes[key] = successes.get(key, 0) + row['correct']  # True = 1, False = 0
+        # .get(key, 0): текущее значение или 0, если ключа ещё нет.
+        counts[key] = counts.get(key, 0) + 1
+        # True складывается как 1, False — как 0.
+        successes[key] = successes.get(key, 0) + row['correct']
     return {key: successes[key] / n for key, n in counts.items()}
 
 

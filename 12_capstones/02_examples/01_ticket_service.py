@@ -1,6 +1,7 @@
 """Локальный учебный HTTP-сервис. CPU; без скачивания моделей и сторонних API.
 Запуск из корня: uv run python 12_capstones/02_examples/01_ticket_service.py
-Это baseline: модель обучается при старте, production-выпуск требует сохранения артефакта.
+Это baseline: модель обучается при старте; production-выпуск требует
+сохранения артефакта.
 """
 from pathlib import Path
 import argparse
@@ -13,7 +14,8 @@ from sklearn.pipeline import make_pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
-ROOT = Path(__file__).resolve().parents[2]  # корень репы: здесь data/ и artifacts/
+# Корень репы: здесь data/ и artifacts/.
+ROOT = Path(__file__).resolve().parents[2]
 VERSION = 'tfidf-demo-v1'
 MAX_BODY_BYTES = 8192
 MAX_TEXT_CHARS = 2000
@@ -27,7 +29,8 @@ def data(name):
 def make_server(port):
     # Модель обучается один раз при старте и переиспользуется всеми запросами.
     train = [r for r in data('tickets') if r['split'] == 'train']
-    model = make_pipeline(TfidfVectorizer(), LogisticRegression(random_state=42))
+    model = make_pipeline(TfidfVectorizer(),
+                          LogisticRegression(random_state=42))
     model.fit([r['text'] for r in train], [r['label'] for r in train])
 
     # Не больше двух классификаций одновременно; остальным сразу отвечаем 429.
@@ -101,7 +104,8 @@ def make_server(port):
                 and 0 < len(obj['text'].strip()) <= MAX_TEXT_CHARS
             )
             if not valid:
-                self.respond(400, {'error': 'expected_nonempty_text_up_to_2000_chars'})
+                self.respond(
+                    400, {'error': 'expected_nonempty_text_up_to_2000_chars'})
                 return
             prediction = str(model.predict([obj['text']])[0])
             self.respond(200, {'label': prediction, 'version': VERSION})
@@ -120,7 +124,8 @@ if __name__ == '__main__':
         parser.error('port outside 0..65535')
 
     server = make_server(args.port)
-    print('Listening on http://127.0.0.1:' + str(server.server_port), flush=True)
+    url = 'http://127.0.0.1:' + str(server.server_port)
+    print('Listening on ' + url, flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

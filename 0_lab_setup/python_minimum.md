@@ -1,195 +1,77 @@
-# Минимум Python для курса
+# Какой Python нужен для курса
 
-Код примеров и заданий курса написан на Python и использует ограниченный набор
-конструкций. Здесь собран весь этот набор: у каждой конструкции — короткий
-пример и ссылка на подробный урок в соседней [Python-базе
+Этот курс не учит Python: язык подробно разобран в отдельной [Python-базе
 серии](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/README.md).
-Если пример понятен с первого взгляда, переходи к следующему; если нет — открой
-ссылку «подробнее», прежде чем идти дальше.
+Здесь только перечислено, какие конструкции встречаются в коде курса, где именно
+и в каком уроке Python-базы их повторить.
 
-Проверить себя можно [входной диагностикой](03_exercises/README.md): она
-использует все конструкции с этой страницы.
+## Как пользоваться страницей
 
-## Функции
+1. Пройди [входную диагностику](03_exercises/README.md). Она занимает
+   45–90 минут и проверяет то, без чего код первых разделов не прочитать.
+2. Если пункт диагностики не получился, найди его тему в таблице ниже и
+   прочитай указанный урок. Возвращайся к диагностике, пока не решишь все
+   пункты без подсказок.
+3. Темы из второй таблицы можно не учить заранее: они встречаются в
+   отдельных примерах, и там кратко объяснено, зачем они нужны.
 
-```python
-def total_minutes(checks, per_check=2):
-    return checks * per_check + 1
+NumPy, PyTorch и scikit-learn знать заранее не нужно: они объясняются в
+самом курсе: первое знакомство с NumPy — в [уроке о
+матрицах](../1_math_and_data/01_theory/04_matrices.md).
 
-print(total_minutes(3))      # 7
-print(total_minutes(3, 5))   # 16
-```
+## Нужно до начала
 
-`def` объявляет функцию, `return` возвращает результат, `per_check=2` — значение
-по умолчанию, если аргумент не передан. Подробнее:
-[функции](https://github.com/krasnosvar/4_python_my_knowledgebase/tree/main/1_python/1_python_fundamentals/06_functions_basics/).
+| Тема | Где встретится | Урок Python-базы |
+|---|---|---|
+| Функции, `return`, значения по умолчанию | каждый пример и каждое задание | [функции](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/06_functions_basics/01_theory/01_functions_basics.md) |
+| `if`, `for`, `range` | каждый пример | [ветвления и циклы](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/04_control_flow/01_theory/01_control_flow.md) |
+| `print` и f-строки, формат `:.3f` | вывод всех примеров | [ввод и вывод](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/03_input_output/01_theory/01_input_output.md) |
+| Списки, словари, множества, срезы | данные обращений, метрики | [коллекции](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/05_collections/01_theory/01_lists_tuples_sets_dicts.md) |
+| Изменяемость: почему функция не должна менять входной список | условия заданий | [изменяемость и ссылки](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/05_collections/01_theory/02_mutability_and_references.md) |
+| Списковые выражения `[... for ... in ... if ...]` | формулы ошибок и метрик в коде | [comprehensions](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/05_collections/01_theory/03_comprehensions.md) |
+| `raise`, `try`/`except`, `ValueError` | почти каждое задание проверяет ошибки входа | [исключения](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/07_exceptions/01_theory/01_exceptions.md) |
+| `import`, `if __name__ == "__main__":` | запуск примеров командой `python файл.py` | [модули и import](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/08_modules_and_imports/01_theory/01_modules_and_imports.md) |
+| `lambda` и `sorted(..., key=...)` | ранжирование документов, проверки заданий | [lambda](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/2_functions_and_decorators/01_theory/01_lambdas.md) |
+| Класс, `__init__`, `self` | модели PyTorch с раздела 3 | [что такое класс](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/3_oop/01_theory/01_what_is_a_class.md) |
+| Наследование и `super().__init__()` | `class Model(nn.Module)` в разделах 3, 4, 8 | [наследование](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/3_oop/01_theory/03_inheritance_and_super.md) |
+| JSON | учебные данные в `data/*.json` | [json и csv](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/6_standard_library/01_theory/05_json_csv_serialization.md) |
+| `pathlib.Path` | пути к данным в примерах | [pathlib](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/6_standard_library/01_theory/06_pathlib_os_filesystem.md) |
+| Виртуальное окружение | `uv sync` и каталог `.venv` | [venv и pip](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/other/01_environments_and_packaging/01_theory/01_venv_and_pip.md) |
 
-## Циклы и условия
+## `zip` и `enumerate`
 
-```python
-for minutes in [3, 12, 7]:
-    if minutes > 10:
-        print("долго")
-    elif minutes > 5:
-        print("средне")
-    else:
-        print("быстро")
-
-for i in range(3):            # 0, 1, 2
-    print(i)
-```
-
-Блок кода задаётся отступом в 4 пробела. Подробнее: [ветвления и
-циклы](https://github.com/krasnosvar/4_python_my_knowledgebase/tree/main/1_python/1_python_fundamentals/04_control_flow/).
-
-## f-строки
-
-```python
-precision = 2 / 3
-print(f"precision={precision:.3f}")   # precision=0.667
-```
-
-Выражение в фигурных скобках подставляется в строку; `:.3f` — три знака после
-запятой. Подробнее: [операторы и
-выражения](https://github.com/krasnosvar/4_python_my_knowledgebase/tree/main/1_python/1_python_fundamentals/02_operators_and_expressions/).
-
-## Списки, словари, множества
-
-```python
-times = [3, 12, 7]
-times.append(5)               # [3, 12, 7, 5]
-print(times[0], times[-1])    # 3 5 — первый и последний элемент
-print(times[1:3])             # [12, 7] — срез: с 1 по 3, не включая 3
-print(len(times))             # 4
-
-ticket = {"text": "не работает вход", "label": "auth"}
-print(ticket["label"])        # auth
-print(ticket.get("owner", "нет"))  # нет — ключа нет, вернулось значение по умолчанию
-for key, value in ticket.items():
-    print(key, value)
-
-labels = {"auth", "db", "auth"}
-print(len(labels))            # 2 — множество хранит только уникальные значения
-print("db" in labels)         # True
-```
-
-Список — упорядоченная последовательность, словарь — пары «ключ → значение»,
-множество — набор без повторов. Подробнее:
-[коллекции](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/05_collections/01_theory/01_lists_tuples_sets_dicts.md).
-
-## zip, enumerate и списковые выражения
+В Python-базе нет отдельного урока об этих двух функциях, а в курсе они
+встречаются часто, поэтому коротко здесь. `zip` идёт по нескольким
+спискам параллельно: в формулах ошибок так берутся пары «вход —
+правильный ответ». `enumerate` добавляет к элементу его номер.
 
 ```python
 x = [1, 2]
 y = [3, 5]
-for a, t in zip(x, y):        # пары (1, 3), затем (2, 5)
-    print(a, t)
+for a, t in zip(x, y):
+    print(a, t)            # 1 3, затем 2 5
 
 for number, text in enumerate(["вход", "оплата"], 1):
-    print(number, text)       # 1 вход, затем 2 оплата
-
-errors = [a * 2 - t for a, t in zip(x, y)]   # [-1, -1]
-positive = [e for e in errors if e > 0]      # [] — фильтр по условию
+    print(number, text)    # 1 вход, затем 2 оплата
 ```
 
-`zip` идёт по нескольким спискам параллельно, `enumerate` добавляет номер.
-Запись `[выражение for ... in ... if ...]` строит новый список, она заменяет
-цикл с `append`. Подробнее:
-[comprehensions](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/05_collections/01_theory/03_comprehensions.md).
+## Можно не учить заранее
 
-## lambda и сортировка по ключу
+Эти конструкции встречаются в одном-двух примерах. Пример работает и без
+глубокого понимания; ссылка нужна, если захочешь разобраться.
 
-```python
-scores = {"doc1": 0.2, "doc2": 0.9, "doc3": 0.5}
-best = sorted(scores, key=lambda doc: scores[doc], reverse=True)
-print(best)                   # ['doc2', 'doc3', 'doc1']
-```
+| Тема | Где встретится | Урок Python-базы |
+|---|---|---|
+| Подсказки типов `def f(x: list) -> float` | разделы 3 и 11 | [аннотации типов](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/other/02_typing_and_static_analysis/01_theory/01_type_hints_and_mypy.md) |
+| `with` и контекстные менеджеры | `with torch.inference_mode():` с раздела 3, trace в разделе 10 | [контекстные менеджеры](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/2_functions_and_decorators/01_theory/06_context_managers.md) |
+| `*args`, `**kwargs` | HTTP-сервис раздела 12 | [args и kwargs](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/2_functions_and_decorators/01_theory/02_args_kwargs.md) |
+| `collections.Counter` | BPE в разделе 4 | [модуль collections](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/6_standard_library/01_theory/01_collections_module.md) |
+| Регулярные выражения | маскирование секретов в разделе 10 | [модуль re](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/6_standard_library/01_theory/04_re_regular_expressions.md) |
+| Генераторы и `yield` | trace в разделе 10 | [генераторы](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/4_iterators_generators/01_theory/02_generators_and_yield.md) |
+| HTTP-сервер | итоговые проекты, раздел 12 | [HTTP и первое приложение](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/3_web_frameworks/1_fastapi/01_theory/01_http_and_first_app.md) |
 
-`lambda doc: scores[doc]` — короткая функция без имени: для каждого документа
-она возвращает его оценку, и `sorted` упорядочивает по ней. Подробнее:
-[lambda](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/2_functions_and_decorators/01_theory/01_lambdas.md).
-
-## Исключения: raise и try/except
-
-```python
-def check_text(text):
-    if not text:
-        raise ValueError("пустой текст")
-    return text
-
-try:
-    check_text("")
-except ValueError as error:
-    print("ошибка:", error)   # ошибка: пустой текст
-```
-
-`raise` останавливает функцию и сообщает об ошибке. `try/except` ловит ошибку
-указанного типа, и программа продолжает работу. Почти все задания курса требуют
-поднимать `ValueError` на неверных входах. Подробнее:
-[исключения](https://github.com/krasnosvar/4_python_my_knowledgebase/tree/main/1_python/1_python_fundamentals/07_exceptions/).
-
-## Классы
-
-```python
-class Ticket:
-    def __init__(self, text, label):
-        self.text = text      # атрибуты конкретного объекта
-        self.label = label
-
-    def short(self, n):
-        return self.text[:n]
-
-ticket = Ticket("не работает вход в систему", "auth")
-print(ticket.label)           # auth
-print(ticket.short(10))       # не работае
-```
-
-Класс — шаблон, объект — конкретный экземпляр. `__init__` заполняет атрибуты при
-создании, `self` — «этот объект». В PyTorch модель — класс, поэтому эта
-конструкция встретится в разделах 3, 4 и 8. Подробнее: [что такое
-класс](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/3_oop/01_theory/01_what_is_a_class.md).
-
-## Файлы и JSON
-
-```python
-import json
-
-rows = [{"text": "не работает вход", "label": "auth"}]
-with open("rows.json", "w", encoding="utf-8") as file:
-    file.write(json.dumps(rows, ensure_ascii=False))
-with open("rows.json", encoding="utf-8") as file:
-    loaded = json.loads(file.read())
-print(loaded == rows)         # True
-```
-
-`with open(...)` открывает файл и гарантированно закрывает его после блока.
-`json.dumps` превращает данные в текст, `json.loads` — обратно. Подробнее:
-[контекстные
-менеджеры](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/2_functions_and_decorators/01_theory/06_context_managers.md).
-
-## import и запуск скрипта
-
-```python
-import math
-from pathlib import Path
-
-print(math.sqrt(25))          # 5.0
-print(Path("data") / "tickets.json")   # data/tickets.json
-
-if __name__ == "__main__":
-    print("файл запущен напрямую")
-```
-
-`import` подключает модуль. Блок `if __name__ == "__main__":` выполняется,
-только когда файл запущен командой `python файл.py`, а не импортирован.
-Подробнее: [модули и
-import](https://github.com/krasnosvar/4_python_my_knowledgebase/tree/main/1_python/1_python_fundamentals/08_modules_and_imports/).
-
-## Подсказки типов
-
-В части примеров встречаются записи вида `def f(x: list[float]) -> float:`. Это
-необязательные подсказки типов: Python их не проверяет при запуске, они помогают
-читать код. Подробнее — раздел «Аннотации типов» в уроке о
-[функциях](https://github.com/krasnosvar/4_python_my_knowledgebase/blob/main/1_python/1_python_fundamentals/06_functions_basics/01_theory/01_functions_basics.md).
+Файлы `03_exercises/check.py` используют `argparse` и `importlib`, чтобы
+загрузить твоё решение или эталон. Разбираться в них не нужно: достаточно
+запускать команду из README задания.
 
 [К разделу 0](README.md).

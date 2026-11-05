@@ -60,8 +60,8 @@ def span_tree_summary(spans):
     for sid, _, start, end in spans:
         total = end - start
         own = total - children_ms[sid]
-        # Отрицательное собственное время значит, что дети пересекаются;
-        # в этом задании дети одного родителя идут друг за другом.
+        # Отрицательное время нарушает условие непересекающихся детей.
+        # Некоторые пересечения эта проверка не обнаруживает.
         if own < 0:
             raise ValueError(f'Children overlap: {sid}')
         summary[sid] = (total, own)

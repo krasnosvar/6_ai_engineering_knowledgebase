@@ -8,7 +8,8 @@ def release_gate(report):
     if set(report) != required:
         raise ValueError('Incomplete release report')
 
-    # Качество и задержка — конечные числа; NaN или inf означают сломанное измерение.
+    # Качество и задержка — конечные числа;
+    # NaN или inf означают сломанное измерение.
     for key in ('quality', 'p95_ms'):
         value = report[key]
         if type(value) not in (int, float) or not math.isfinite(value):
@@ -39,7 +40,8 @@ for report in reports:
     print(report, '=>', release_gate(report))
 
 # Идеальное качество не компенсирует одну утечку доступа.
-assert not release_gate({'quality': 1., 'p95_ms': 10, 'acl_failures': 1})['approved']
+leak = {'quality': 1., 'p95_ms': 10, 'acl_failures': 1}
+assert not release_gate(leak)['approved']
 
 # Отсутствующее измерение задержки (NaN) должно остановить выпуск, а не пройти.
 try:

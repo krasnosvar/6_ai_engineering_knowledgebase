@@ -28,4 +28,5 @@ if __name__ == '__main__':
             print('VALID', validate(raw))
         except (ValueError, TypeError) as e:
             print('INVALID', str(e))
-    print('VALID does not mean semantically correct: compare with ground truth.')
+    print('VALID does not mean semantically correct: '
+          'compare with ground truth.')

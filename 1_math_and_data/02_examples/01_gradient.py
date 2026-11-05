@@ -1,6 +1,6 @@
 """CPU, stdlib: проверить формулу градиента и обучить модель y = 2x + 1.
 
-Формулы — из урока 1_math_and_data/01_theory/02_gradients.md.
+Формулы — из урока 1_math_and_data/01_theory/07_gradients.md.
 """
 import math
 
@@ -42,7 +42,8 @@ def main():
         b -= learning_rate * db
 
     print(f"градиент по w: формула={analytic:.5f}, численно={numeric:.5f}")
-    print(f"ошибка {before:.6f} -> {loss(w, b, x, y):.9f}; w={w:.5f}, b={b:.5f}")
+    after = loss(w, b, x, y)
+    print(f"ошибка {before:.6f} -> {after:.9f}; w={w:.5f}, b={b:.5f}")
     assert abs(w - 2) < 1e-5 and abs(b - 1) < 1e-5
 
 

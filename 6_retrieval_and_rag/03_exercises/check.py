@@ -67,10 +67,12 @@ assert m.ivf_candidates([0.9, 0.1], centers, cell, 3) == [0, 1, 2, 3, 4]
 # Равное сходство с центрами 0 и 1: выбирается меньший номер.
 assert m.ivf_candidates([0.5, 0.5], centers, cell, 1) == [0, 3]
 assert m.ivf_candidates([-1, 0], centers, [0, 1], 1) == []  # пустая ячейка
+assert m.ivf_candidates([1, 0], centers, [], 1) == []  # нет документов
 expect_value_error(lambda: m.ivf_candidates([1, 0], centers, cell, 0))
 expect_value_error(lambda: m.ivf_candidates([1, 0], centers, cell, 4))
 expect_value_error(lambda: m.ivf_candidates([1, 0, 0], centers, cell, 1))
 expect_value_error(lambda: m.ivf_candidates([1, 0], centers, [0, 5], 1))
+expect_value_error(lambda: m.ivf_candidates([1, 0], centers, [0.5], 1))
 
 mode = 'answers' if options.answers else 'student'
 print('PASS:', source.parent.parent.name, mode)

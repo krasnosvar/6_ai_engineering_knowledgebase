@@ -18,4 +18,5 @@ if __name__ == '__main__':
           'double context:', long_context / 2**30)
     assert long_context == 2 * short_context
 
-    print('Exclude runtime, activations, quantization metadata and optimizer state.')
+    print('Exclude runtime, activations, quantization metadata '
+          'and optimizer state.')

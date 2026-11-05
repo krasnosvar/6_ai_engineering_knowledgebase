@@ -41,5 +41,6 @@ with torch.inference_mode():
     val_acc = (model(x_val).argmax(-1) == y_val).float().mean().item()
 print(f'Лучший val_loss={best_val:.3f} на эпохе {best_epoch}: '
       f'здесь остановила бы ранняя остановка.')
-print(f'Итог: train accuracy={train_acc:.3f}; validation accuracy={val_acc:.3f}')
+print(f'Итог: train accuracy={train_acc:.3f}; '
+      f'validation accuracy={val_acc:.3f}')
 assert train_acc > 0.95 and val_acc < 0.75

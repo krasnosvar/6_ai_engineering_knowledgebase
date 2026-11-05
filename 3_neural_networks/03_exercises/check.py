@@ -50,12 +50,14 @@ y = torch.tensor([0, 1])
 oa = torch.optim.SGD(a.parameters(), lr=.1)
 ob = torch.optim.SGD(b.parameters(), lr=.1)
 
-# Existing stale gradients must not affect the result.
+# Старые градиенты в .grad не должны влиять на шаг: one_step обнуляет их.
 for p in a.parameters():
     p.grad = torch.ones_like(p) * 100
+a.eval()
 value = m.one_step(a, oa, x, y)
 m.one_step(b, ob, x, y)
 assert isinstance(value, float) and value > 0
+assert a.training
 # После шага веса обеих моделей должны совпасть.
 assert all(torch.allclose(p, q) for p, q in zip(a.parameters(), b.parameters()))
 
